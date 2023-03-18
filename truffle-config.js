@@ -1,14 +1,24 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const fs = require('fs');
 
-const mnemonic = "46ba27be55a1de5320c6989bae417d3807e6511ace42f986b9916ee82647febf"
-const key="GRKYAGR1EHBBC2V9R4R7ZN15C34N6RMG5Y"
+const mnemonic = "8f8d64e7754dff2d49a0eacaf4fefce31bc6845124b4e7a5a8dcb9c398a172a0"
+// const key="GRKYAGR1EHBBC2V9R4R7ZN15C34N6RMG5Y" -bsc testnet
+const key="e4c6b2743e544bdb910ef53155687b0f"
+const keyETH='N2DMMNDUN27W4CA99IGEHXE1AS4UI7ANNT'
 module.exports = {
   plugins: [
     'truffle-plugin-verify'
   ],
   api_keys: {
-    bscscan: key
+    // bscscan: key
+    goerli_etherscan: keyETH,
+    // goerli:key
+  },
+  goerli_etherscan: {
+    // bscscan: key
+    // goerli:key
+
+    goerli_etherscan: key
   },
   networks: {
     development: {
@@ -22,7 +32,15 @@ module.exports = {
       confirmations: 10,
       timeoutBlocks: 200,
       skipDryRun: true
-    }
+    },
+    testnetETH: {
+      provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/e4c6b2743e544bdb910ef53155687b0f`),
+      network_id: 5,
+      confirmations: 10,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
+    
   },
 
   // Set default mocha options here, use special reporters etc.
